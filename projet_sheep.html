@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Projet Conception Site Web - 1A Info</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<link rel="stylesheet" href="tools/normalize.css"/>
+	<style type="text/css">
+     * { text-align: center; }
+     .canva { width: 512px; height: 256px; border-width: 2px; border-style: solid; margin-left: auto; margin-right: auto;}
+     #stop_clic:hover { font-variant: small-caps; cursor: pointer; }
+   </style>
+   <script type="text/javascript" src="tools/sprites.js"></script>
+</head>
+<body>	
+   <div class="canva">
+		<canvas id="canvanim" width="512" height="256"> 
+			Ne supporte pas canvas.
+		</canvas>
+	</div>
+	<div id="stop_clic">Start/Stop</div>
+
+	<script type="text/javascript">
+        var canva=document.getElementById("canvanim");
+        var ctx=canva.getContext("2d");
+        var sprite = new  CanvasSprite("images/sheeppoe.png",0,0,40,40,16,8 ,ctx)
+        
+
+        // Add animations
+        sprite.addAnimation("courir", [2, 3, 4,5]);
+        sprite.addAnimation("rouler", [2, 24, 25, 26, 27, 28, 29, 30, 23]);
+        sprite.addAnimation("bailler",[3,58,59,71,72,107,108,39,110,111]);
+
+        
+        sprite.selectAnimation("rouler", true);
+        sprite.simpleAnim(200); 
+
+        // Stop animation button
+        const boutton=document.getElementById("stop_clic");
+        var stop=true;
+        boutton.addEventListener("click",function(){
+            if(stop){
+                sprite.stopAnim(sprite.spriteImage.timeId);
+                stop=false;
+            }
+            else{
+                sprite.simpleAnim(500);
+                stop=true;
+            }
+        });
+	</script>
+</body>
+</html>
